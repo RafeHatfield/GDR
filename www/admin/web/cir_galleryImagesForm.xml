@@ -1,0 +1,13 @@
+<xfa name="saveGalleryImages" value="web.galleryImagesForm" />
+
+<set name="attributes.gal_id" value="0" overwrite="no" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.imageObj" methodcall="galleryImagesSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.imageObj" methodcall="getGalleryImages(gal_id=attributes.gal_id)" returnVariable="qGalleryImages" />
+
+<do action="v_web.galleryImagesForm" contentVariable="content.mainContent" append="yes" /> 

@@ -1,0 +1,29 @@
+<xfa name="saveMenuArea" value="web.menuAreaList" />
+<xfa name="editMenuArea" value="web.menuAreaList" />
+
+<set name="attributes.mna_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.menuObj" methodcall="menuAreaSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.menuObj" methodcall="getMenuArea(attributes.mna_id)" returnVariable="qMenuArea" />
+
+<if condition="qMenuArea.recordCount gte 1">
+	<true>
+		<set name="attributes.mna_title" value="#qMenuArea.mna_title#" />
+		<set name="attributes.mna_active" value="#qMenuArea.mna_active#" />
+	</true>
+	<false>
+		<set name="attributes.mna_title" value="" />
+		<set name="attributes.mna_active" value="0" />
+	</false>
+</if>
+
+<do action='v_web.menuAreaForm' contentVariable="content.mainContent" append="yes" />
+
+<invoke object="application.menuObj" methodcall="getMenuAreas()" returnVariable="qMenuAreas" />
+
+<do action='v_web.menuAreaList' contentVariable="content.mainContent" append="yes" />

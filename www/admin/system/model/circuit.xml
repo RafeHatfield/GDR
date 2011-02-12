@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuit access="public">
+	<fuseaction name="fuseListAction">
+		<include template="act_fuseListAction" />
+	</fuseaction>
+	<fuseaction name="getFuse">
+		<include template="qry_getFuse" />
+	</fuseaction>
+	<fuseaction name="getFuseProfilePermissions">
+		<include template="qry_getFuseProfilePermissions" />
+	</fuseaction>
+	<fuseaction name="getFuses">
+		<include template="qry_getFuses" />
+	</fuseaction>
+	<fuseaction name="getMember">
+		<include template="qry_getMember" />
+	</fuseaction>
+	<fuseaction name="getMembers">
+		<include template="qry_getMembers" />
+	</fuseaction>
+	<fuseaction name="getMenuSection">
+		<include template="qry_getMenuSection" />
+	</fuseaction>
+	<fuseaction name="getMenuSections">
+		<include template="qry_getMenuSections" />
+	</fuseaction>
+	<fuseaction name="getProcess">
+		<include template="qry_getProcess" />
+	</fuseaction>
+	<fuseaction name="getProcessFuses">
+		<include template="qry_getProcessFuses" />
+	</fuseaction>
+	<fuseaction name="getProcesses">
+		<include template="qry_getProcesses" />
+	</fuseaction>
+	<fuseaction name="getProfile">
+		<include template="qry_getProfile" />
+	</fuseaction>
+	<fuseaction name="getProfileFuses">
+		<include template="qry_getProfileFuses" />
+	</fuseaction>
+	<fuseaction name="getProfilePermissions">
+		<include template="qry_getProfilePermissions" />
+	</fuseaction>
+	<fuseaction name="getProfiles">
+		<include template="qry_getProfiles" />
+	</fuseaction>
+	<fuseaction name="memberAction">
+		<include template="act_memberAction" />
+	</fuseaction>
+	<fuseaction name="menuSectionAction">
+		<include template="act_menuSectionAction" />
+	</fuseaction>
+	<fuseaction name="processAction">
+		<include template="act_processAction" />
+	</fuseaction>
+	<fuseaction name="profileAction">
+		<include template="act_profileAction" />
+	</fuseaction>
+	<fuseaction name="profilePermissionsUpdate">
+		<include template="act_profilePermissionsUpdate" />
+	</fuseaction>
+</circuit>

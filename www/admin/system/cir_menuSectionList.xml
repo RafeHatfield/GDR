@@ -1,0 +1,28 @@
+<xfa name="saveMenuSection" value="system.menuSectionList" />
+<xfa name="editMenuSection" value="system.menuSectionList" />
+
+<set name="attributes.mse_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<do action="m_system.menuSectionAction" />
+	</true>
+</if>
+
+<do action="m_system.getMenuSection" />
+<if condition="getMenuSection.recordCount gte 1">
+	<true>
+		<set name="attributes.mse_title" value="#getMenuSection.mse_title#" />
+		<set name="attributes.mse_order" value="#getMenuSection.mse_order#" />
+	</true>
+	<false>
+		<set name="attributes.mse_title" value="" />
+		<set name="attributes.mse_order" value="0" />
+	</false>
+</if>
+
+<do action='v_system.menuSectionForm' contentVariable="content.mainContent" append="yes" />
+
+<do action="m_system.getMenuSections" />
+
+<do action='v_system.menuSectionList' contentVariable="content.mainContent" append="yes" />

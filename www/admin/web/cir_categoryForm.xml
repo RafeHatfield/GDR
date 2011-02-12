@@ -1,0 +1,10 @@
+<set name="attributes.cat_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodcall="categorySave(argumentCollection=attributes)" />
+		<relocate url="#myself#web.categoryList" addtoken="false" type="client" />
+	</true>
+</if>
+ 
+<invoke object="application.contentObj" methodcall="displayCategoryForm(cat_id=attributes.cat_id)" returnVariable="content.mainContent" />

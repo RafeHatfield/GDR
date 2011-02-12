@@ -1,0 +1,15 @@
+<xfa name="editContent" value="web.contentForm" />
+<xfa name="searchContent" value="web.contentList" />
+
+<set name="attributes.mna_id" value="0" overwrite="false" />
+<set name="attributes.searchContentType" value="Content" overwrite="false" />
+<set name="attributes.searchMenuArea" value="0" overwrite="false" />
+<set name="attributes.fastFind" value="" overwrite="false" />
+
+<invoke object="application.menuObj" methodcall="getMenuAreas()" returnVariable="qMenuAreas" />
+  
+<invoke object="application.contentObj" methodcall="getAllContent(mna_id=attributes.mna_id,con_type=attributes.searchContentType,menuArea=attributes.searchMenuArea,fastFind=attributes.fastFind)" returnVariable="qAllContent" />
+
+<do action="v_web.contentSearchForm" contentVariable="content.mainContent" append="yes" />
+
+<do action='v_web.contentList' contentVariable="content.mainContent" append="yes" />

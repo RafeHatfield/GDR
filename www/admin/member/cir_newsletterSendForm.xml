@@ -1,0 +1,24 @@
+<xfa name="sendNewsletter" value="member.newsletterSendForm" />
+
+<set name="attributes.nsl_id" value="0" overwrite="no" />
+<set name="attributes.grp_id" value="" overwrite="no" />
+<set name="attributes.cou_id" value="" overwrite="no" />
+<set name="attributes.int_id" value="" overwrite="no" />
+
+<set name="attributes.newslettersSent" value="0" overwrite="no" />
+
+<if condition="isDefined('attributes.send')">
+	<true>
+		<invoke object="application.contentObj" methodCall="newsletterSend(argumentCollection = attributes)" returnVariable="attributes.newslettersSent" />
+	</true>
+</if>
+
+<invoke object="application.contentObj" methodcall="getNewsletter(nsl_id=attributes.nsl_id)" returnVariable="qNewsletter" />
+<invoke object="application.memberObj" methodcall="getGroups()" returnVariable="qGroups" />
+<invoke object="application.memberObj" methodcall="getCountries()" returnVariable="qCountries" />
+<invoke object="application.memberObj" methodcall="getInterests()" returnVariable="qInterests" />
+<invoke object="application.memberObj" methodcall="getMemberNewsletter(nsl_id=attributes.nsl_id)" returnVariable="qMemberNewsletter" />
+
+<do action="v_member.newsletterSendForm" contentVariable="content.mainContent" append="yes" />
+
+<do action="v_member.memberNewsletterList" contentVariable="content.mainContent" append="yes" />

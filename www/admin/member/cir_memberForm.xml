@@ -1,0 +1,14 @@
+<set name="attributes.mem_id" value="0" overwrite="no" />
+<set name="attributes.grp_id" value="" overwrite="no" />
+<set name="attributes.groupOther" value="" overwrite="no" />
+ 
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.memberObj" methodcall="memberSave(argumentCollection=attributes)" returnVariable="attributes.mem_id" />
+		<invoke object="application.memberObj" methodcall="memberGroupSave(mem_id=attributes.mem_id, grp_id=attributes.grp_id, groupOther=attributes.groupOther)" />
+	</true>
+</if>
+
+<invoke object="application.memberObj" methodcall="displayMemberForm(mem_id=attributes.mem_id)" returnVariable="displayMemberFormOutput" />
+
+<set name="content.mainContent" value="#displayMemberFormOutput#" overwrite="yes" />

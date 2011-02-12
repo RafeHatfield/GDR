@@ -1,0 +1,6 @@
+<xfa name="editNewsletter" value="member.newsletterForm" />
+<xfa name="sendNewsletter" value="member.newsletterSendForm" />
+
+<invoke object="application.contentObj" methodcall="getNewsletters()" returnVariable="qNewsletters" />
+
+<do action='v_member.newsletterList' contentVariable="content.mainContent" append="yes" />

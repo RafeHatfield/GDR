@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuit access="public">
+	<fuseaction name="fuseList">
+		<include template="dsp_fuseList" />
+	</fuseaction>
+	<fuseaction name="fuseForm">
+		<include template="dsp_fuseForm" />
+	</fuseaction>
+	<fuseaction name="memberForm">
+		<include template="dsp_memberForm" />
+	</fuseaction>
+	<fuseaction name="memberList">
+		<include template="dsp_memberList" />
+	</fuseaction>
+	<fuseaction name="memberSearch">
+		<include template="dsp_memberSearch" />
+	</fuseaction>
+	<fuseaction name="menuSectionList">
+		<include template="dsp_menuSectionList" />
+	</fuseaction>
+	<fuseaction name="menuSectionForm">
+		<include template="dsp_menuSectionForm" />
+	</fuseaction>
+	<fuseaction name="processList">
+		<include template="dsp_processList" />
+	</fuseaction>
+	<fuseaction name="processForm">
+		<include template="dsp_processForm" />
+	</fuseaction>
+	<fuseaction name="profileList">
+		<include template="dsp_profileList" />
+	</fuseaction>
+	<fuseaction name="profileForm">
+		<include template="dsp_profileForm" />
+	</fuseaction>
+	<fuseaction name="profilePermissionsList">
+		<include template="dsp_profilePermissionsList" />
+	</fuseaction>
+	<fuseaction name="systemSettingsForm">
+		<include template="dsp_systemSettingsForm" />
+	</fuseaction>
+</circuit>

@@ -1,0 +1,35 @@
+<xfa name="saveMember" value="system.memberForm" />
+<xfa name="changePassword" value="system.passwordForm" />
+
+<set name="attributes.usr_id" value="0" overwrite="false" />
+<set name="attributes.prf_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<do action="m_system.memberAction" />
+		<relocate url="#myself#system.memberList" addtoken="false" type="client" />
+	</true>
+</if>
+
+<do action="m_system.getMember" />
+<do action="m_system.getProfiles" />
+
+<!-- this section will be expanded to include all the details about a member - limiting to name and profile for now -->
+<if condition="getMember.recordCount gte 1">
+	<true>
+		<set name="attributes.usr_firstName" value="#getMember.usr_firstName#" />
+		<set name="attributes.usr_surname" value="#getMember.usr_surname#" />
+		<set name="attributes.usr_email" value="#getMember.usr_email#" />
+		<set name="attributes.usr_password" value="#getMember.usr_password#" />
+		<set name="attributes.prf_id" value="#getMember.usr_profile#" />
+	</true>
+	<false>
+		<set name="attributes.usr_firstName" value="" overwrite="false" />
+		<set name="attributes.usr_surname" value="" overwrite="false" />
+		<set name="attributes.usr_email" value="" overwrite="false" />
+		<set name="attributes.usr_password" value="" overwrite="false" />
+		<set name="attributes.prf_id" value="0" />
+	</false>
+</if>
+
+<do action='v_system.memberForm' contentVariable="content.mainContent" append="yes" />

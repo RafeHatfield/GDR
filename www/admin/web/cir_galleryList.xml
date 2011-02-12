@@ -1,0 +1,35 @@
+<xfa name="saveGallery" value="web.galleryList" />
+<xfa name="editGallery" value="web.galleryList" />
+<xfa name="editGalleryImages" value="web.galleryImagesForm" />
+
+<set name="attributes.gal_id" value="0" overwrite="no" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.imageObj" methodcall="gallerySave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.imageObj" methodcall="getGallery(gal_id=attributes.gal_id)" returnVariable="qGallery" />
+ 
+<if condition="qGallery.recordCount gte 1">
+
+	<true>
+		<set name="attributes.gal_title" value="#qGallery.gal_title#" />
+		<set name="attributes.gal_image" value="#qGallery.gal_image#" />
+		<set name="attributes.gal_active" value="#qGallery.gal_active#" />
+	</true>
+	
+	<false>
+		<set name="attributes.gal_title" value="" />
+		<set name="attributes.gal_image" value="" />
+		<set name="attributes.gal_active" value="1" />
+	</false>
+	
+</if> 
+ 
+<do action="v_web.galleryForm" contentVariable="content.mainContent" append="yes" /> 
+ 
+<invoke object="application.imageObj" methodcall="getGalleries()" returnVariable="qGalleries" />
+
+<do action='v_web.galleryList' contentVariable="content.mainContent" append="yes" />

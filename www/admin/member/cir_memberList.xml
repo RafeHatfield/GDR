@@ -1,0 +1,18 @@
+<xfa name="editMember" value="member.memberForm" />
+<xfa name="memberMessages" value="member.memberMessages" />
+
+<set name="attributes.fastFind" value="" overwrite="no" />
+<set name="attributes.groupList" value="13" overwrite="no" />
+<set name="attributes.country" value="0" overwrite="no" />
+
+<invoke object="application.memberObj" methodcall="displayMemberSearch(argumentCollection=attributes)" returnVariable="content.mainContent" />
+ 
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.memberObj" methodcall="approveMembers(attributes.approvedMembers)" />
+	</true>
+</if>
+
+<invoke object="application.memberObj" methodcall="getMembers(argumentCollection=attributes)" returnVariable="qMembers" />
+
+<do action='v_member.memberList' contentVariable="content.mainContent" append="yes" />

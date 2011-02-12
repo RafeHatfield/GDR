@@ -1,0 +1,2 @@
+<cfcontent reset="yes"/><cfheader name="Content-Disposition" value="inline; filename=#attributes.fileName#"/>
+<cfheader name="Expires" value="#Now()#"/><cfcontent type="#attributes.docType#"/><cfoutput>#content.mainContent#</cfoutput>

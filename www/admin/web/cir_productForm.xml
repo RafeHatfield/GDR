@@ -1,0 +1,47 @@
+<xfa name="saveProduct" value="web.productForm" />
+
+<set name="attributes.prd_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodcall="productSave(argumentCollection=attributes)" />
+		<relocate url="#myself#web.productList&amp;cat_id=#attributes.prd_category#&amp;subcat_id=#prd_subCategory#" addtoken="false" type="client" />
+	</true>
+</if>
+ 
+<invoke object="application.contentObj" methodcall="getProduct(prd_id=attributes.prd_id)" returnVariable="qProduct" />
+<invoke object="application.menuObj" methodcall="getCategories()" returnVariable="qCategories" />
+<invoke object="application.menuObj" methodcall="getAllSubCategories()" returnVariable="qSubCategories" />
+<invoke object="application.menuObj" methodcall="getAllCategories3()" returnVariable="qCategories3" />
+
+<if condition="qProduct.recordCount gte 1">
+
+	<true>
+		<set name="attributes.prd_title" value="#qProduct.prd_title#" />
+		<set name="attributes.prd_code" value="#qProduct.prd_code#" />
+		<set name="attributes.prd_desc" value="#qProduct.prd_desc#" />
+		<set name="attributes.prd_colour" value="#qProduct.prd_colour#" />
+		<set name="attributes.prd_order" value="#qProduct.prd_order#" />
+		<set name="attributes.prd_active" value="#qProduct.prd_active#" />
+		<set name="attributes.prd_dimension" value="#qProduct.prd_dimension#" />
+		<set name="attributes.prd_category" value="#qProduct.prd_category#" />
+		<set name="attributes.prd_subcategory" value="#qProduct.prd_subcategory#" />
+		<set name="attributes.prd_category3" value="#qProduct.prd_category3#" />
+	</true>
+	
+	<false>
+		<set name="attributes.prd_title" value="" />
+		<set name="attributes.prd_code" value="" />
+		<set name="attributes.prd_desc" value="" />
+		<set name="attributes.prd_colour" value="" />
+		<set name="attributes.prd_order" value="" />
+		<set name="attributes.prd_active" value="1" />
+		<set name="attributes.prd_dimension" value="" />
+		<set name="attributes.prd_category" value="0" />
+		<set name="attributes.prd_subcategory" value="0" />
+		<set name="attributes.prd_category3" value="0" />
+	</false>
+	
+</if>
+
+<do action='v_web.productForm' contentVariable="content.mainContent" append="yes" />

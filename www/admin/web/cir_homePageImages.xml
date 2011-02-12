@@ -1,0 +1,7 @@
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.imageObj" methodcall="homePageImagesSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.imageObj" methodcall="homePageImagesForm()" returnVariable="content.mainContent" />

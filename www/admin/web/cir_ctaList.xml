@@ -1,0 +1,37 @@
+<xfa name="saveCTA" value="web.ctaList" />
+<xfa name="editCTA" value="web.ctaList" />
+
+<set name="attributes.cta_id" value="0" overwrite="no" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.ctaObj" methodcall="ctaSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.ctaObj" methodcall="getCTA(cta_id=attributes.cta_id)" returnVariable="qCTA" />
+ 
+<if condition="qCTA.recordCount gte 1">
+	<true>
+		<set name="attributes.cta_title" value="#qCTA.cta_title#" />
+		<set name="attributes.cta_image" value="#qCTA.cta_image#" />
+		<set name="attributes.cta_link" value="#qCTA.cta_link#" />
+		<set name="attributes.cta_active" value="#qCTA.cta_active#" />
+		<set name="attributes.cta_random" value="#qCTA.cta_random#" />
+	</true>
+	
+	<false>
+		<set name="attributes.cta_title" value="" />
+		<set name="attributes.cta_image" value="" />
+		<set name="attributes.cta_link" value="" />
+		<set name="attributes.cta_active" value="0" />
+		<set name="attributes.cta_random" value="0" />
+	</false>
+	
+</if> 
+ 
+<do action="v_web.ctaForm" contentVariable="content.mainContent" append="yes" /> 
+ 
+<invoke object="application.ctaObj" methodcall="getCTAs()" returnVariable="qCTAs" />
+
+<do action='v_web.ctaList' contentVariable="content.mainContent" append="yes" />

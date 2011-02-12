@@ -1,0 +1,56 @@
+.dynCalendar_header{
+  background-color: #eeeeee;
+  color: #000000;
+  font-family: Arial, Verdana, Helvetica, Sans-Serif;
+  font-size: 10pt;
+  font-weight: bold;
+}
+.dynCalendar_dayname {
+  background-color: #eeeeee;
+  border: 1px solid #c0c0c0;
+  color: #000000;
+  font-family: Arial, Verdana, Helvetica, Sans-Serif;
+  font-size: 8pt;
+  text-align: center;
+}
+.dynCalendar_close {
+  background-color: #eeeeee;
+  border: 1px solid #c0c0c0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #999999;
+  font-size: 8pt;
+}
+.dynCalendar_day {
+  background-color: #eeeeee;
+  color: #000000;
+  font-family: Arial, Verdana, Helvetica, Sans-Serif;
+  font-size: 8pt;
+}
+.dynCalendar_today {
+  background-color: #ffffff;
+  border: 1px solid red;
+  font-family: Arial, Verdana, Helvetica, Sans-Serif;
+  font-size: 8pt;
+}
+.dynCalendar {
+  background-color: #c0c0c0;
+  border: 2px outset white;
+  visibility: hidden;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+A.dynlinks:link {
+  FONT-WEIGHT: bold; COLOR: #000000; TEXT-DECORATION: none;
+}
+A.dynlinks:visited {
+  FONT-WEIGHT: bold; COLOR: #000000; TEXT-DECORATION: none;
+}
+A.dynlinks:hover {
+  FONT-WEIGHT: bold; COLOR: red; TEXT-DECORATION: underline;
+}
+.dynCalendar_select {
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background-color: #c0c0c0;   
+}

@@ -1,0 +1,33 @@
+<xfa name="savePromotion" value="villa.promotionsList" />
+<xfa name="editPromotion" value="villa.promotionForm" />
+
+<set name="attributes.prm_id" value="0" overwrite="no" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.villaObj" methodcall="promotionSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.villaObj" methodcall="getPromotion(prm_id=attributes.prm_id)" returnVariable="qPromotion" />
+ 
+<if condition="qPromotion.recordCount gte 1">
+	<true>
+		<set name="attributes.prm_title" value="#qPromotion.prm_title#" />
+		<set name="attributes.prm_body" value="#qPromotion.prm_body#" />
+		<set name="attributes.prm_active" value="#qPromotion.prm_active#" />
+	</true>
+	
+	<false>
+		<set name="attributes.prm_title" value="" />
+		<set name="attributes.prm_body" value="" />
+		<set name="attributes.prm_active" value="" />
+	</false>
+	
+</if> 
+ 
+<do action="v_villa.promotionForm" contentVariable="content.mainContent" append="yes" /> 
+ 
+<invoke object="application.villaObj" methodcall="getPromotionsAdmin()" returnVariable="qPromotions" />
+
+<do action='v_villa.promotionsList' contentVariable="content.mainContent" append="yes" />

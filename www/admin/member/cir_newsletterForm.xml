@@ -1,0 +1,26 @@
+<xfa name="saveNewsletter" value="member.newsletterForm" />
+
+<set name="attributes.nsl_id" value="0" overwrite="no" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodCall="newsletterSave(argumentCollection=attributes)" returnVariable="attributes.nsl_id" />
+	</true>
+</if>
+
+<invoke object="application.contentObj" methodcall="getNewsletter(nsl_id=attributes.nsl_id)" returnVariable="qNewsletter" />
+<invoke object="application.contentObj" methodcall="getNewsletterContent(nsl_id=attributes.nsl_id)" returnVariable="qNewsletterContent" />
+<invoke object="application.contentObj" methodcall="getAllContent(approved=1,con_type='Content,Newsletter',excludeContent=valueList(qNewsletterContent.con_id))" returnVariable="qAllContent" />
+
+<if condition="qNewsletter.recordCount">
+	<true>
+		<set name="attributes.nsl_title" value="#qNewsletter.nsl_title#" />
+		<set name="attributes.nsl_body" value="#qNewsletter.nsl_body#" />
+	</true>
+	<false>
+		<set name="attributes.nsl_title" value="" />
+		<set name="attributes.nsl_body" value="" />
+	</false>
+</if>
+
+<do action='v_member.newsletterForm' contentVariable="content.mainContent" append="yes" />

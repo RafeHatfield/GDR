@@ -1,0 +1,55 @@
+<xfa name="saveFuse" value="system.fuseList" />
+
+<set name="attributes.pfu_id" value="0" overwrite="false" />
+<set name="attributes.pro_id" value="0" overwrite="false" />
+<set name="attributes.pfu_isMenu" value="0" overwrite="false" />
+<set name="attributes.permissionsList" value="" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<do action="m_system.fuseListAction" />
+	</true>
+</if>
+
+<do action="m_system.getFuse" />
+
+<if condition="getFuse.recordCount gte 1">
+	<true>
+		<set name="attributes.pfu_name" value="#getFuse.pfu_name#" />
+		<set name="attributes.pfu_path" value="#getFuse.pfu_path#" />
+		<set name="attributes.pfu_circuitXML" value="#getFuse.pfu_circuitXML#" />
+		<set name="attributes.pfu_isMenu" value="#getFuse.pfu_isMenu#" />
+		<set name="attributes.pfu_title" value="#getFuse.pfu_title#" />
+		<set name="attributes.pfu_menuOrder" value="#getFuse.pfu_menuOrder#" />
+		<set name="attributes.mse_id" value="#getFuse.pfu_menuSection#" />
+		
+		<!--
+		<do action="m_system.getFuseProfilePermissions" />
+		<set name="attributes.fuseProfilePermissionsList" value="#valueList(getFuseProfilePermissions.pff_profile)#" />
+		-->
+	</true>
+	<false>
+		<set name="attributes.pfu_name" value="" />
+		<set name="attributes.pfu_path" value="" />
+		<set name="attributes.pfu_circuitXML" value="" />
+		<set name="attributes.pfu_isMenu" value="0" />
+		<set name="attributes.pfu_title" value="" />
+		<set name="attributes.pfu_menuOrder" value="0" />
+		<set name="attributes.mse_id" value="0" />
+		
+		<!--
+		<set name="attributes.fuseProfilePermissionsList" value="" />
+		-->
+	</false>
+</if>
+
+<do action='m_system.getProcess' />
+<do action='m_system.getProcesses' />
+<do action='m_system.getMenuSections' />
+<!-- <do action='m_system.getProfiles' /> -->
+
+<do action='v_system.fuseForm' contentVariable="content.mainContent" append="yes" />
+
+<do action="m_system.getFuses" />
+
+<do action='v_system.fuseList' contentVariable="content.mainContent" append="yes" />

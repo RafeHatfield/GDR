@@ -1,0 +1,16 @@
+Keyres DynCalendar Installation
+
+Upload the following files to your server. The "imgDir" path in the Date Select JavaScript coding must be changed if the files are placed in a location other than the default "images/" directory.
+
+1) keyres-browserSniffer.js
+2) keyres-dynCalendar.js
+3) keyres-dynCalendar.css
+4) dynCalendar.gif
+5) cal.gif
+6) prev.gif
+7) next.gif
+
+Colors and font size for the calendar can changed as required by editing the keyres-dynCalendar.css style sheet file.
+
+NOTE: keyres-dynCalendar.js was last modified 16 December 2005 and will not be compatible with Date Select coding previously generated prior to 16 December 2005
+

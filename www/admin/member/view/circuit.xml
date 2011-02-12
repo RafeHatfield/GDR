@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuit access="internal">	
+
+	<fuseaction name="memberList">
+		<include template="dsp_memberList" />
+	</fuseaction>
+	
+	<fuseaction name="memberMessages">
+		<include template="dsp_memberMessages" />
+	</fuseaction>
+			
+	<fuseaction name="memberNewsletterList">
+		<include template="dsp_memberNewsletterList" />
+	</fuseaction>
+	
+	<fuseaction name="newsletterList">
+		<include template="dsp_newsletterList" />
+	</fuseaction>
+		
+	<fuseaction name="newsletterForm">
+		<include template="dsp_newsletterForm" />
+	</fuseaction>
+	
+	<fuseaction name="newsletterSendForm">
+		<include template="dsp_newsletterSendForm" />
+	</fuseaction>
+
+	<fuseaction name="newsletterView">
+		<include template="dsp_newsletterView" />
+	</fuseaction>
+	
+</circuit>

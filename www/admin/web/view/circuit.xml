@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuit access="internal">	
+
+	<fuseaction name="contentForm">
+		<include template="dsp_contentForm" />
+	</fuseaction>
+	<fuseaction name="contentList">
+		<include template="dsp_contentList" />
+	</fuseaction>
+	<fuseaction name="contentSearchForm">
+		<include template="dsp_contentSearchForm" />
+	</fuseaction>
+	
+	<fuseaction name="ctaForm">
+		<include template="dsp_ctaForm" />
+	</fuseaction>
+	<fuseaction name="ctaList">
+		<include template="dsp_ctaList" />
+	</fuseaction>
+		
+	<fuseaction name="galleryForm">
+		<include template="dsp_galleryForm" />
+	</fuseaction>
+	<fuseaction name="galleryImagesForm">
+		<include template="dsp_galleryImagesForm" />
+	</fuseaction>
+	<fuseaction name="galleryList">
+		<include template="dsp_galleryList" />
+	</fuseaction>
+	
+	<fuseaction name="gloryBoxForm">
+		<include template="dsp_gloryBoxForm" />
+	</fuseaction>
+	<fuseaction name="gloryBoxList">
+		<include template="dsp_gloryBoxList" />
+	</fuseaction>
+	
+	<fuseaction name="menuAreaForm">
+		<include template="dsp_menuAreaForm" />
+	</fuseaction>
+	<fuseaction name="menuAreaList">
+		<include template="dsp_menuAreaList" />
+	</fuseaction>
+	
+	<fuseaction name="productSearchForm">
+		<include template="dsp_productSearchForm" />
+	</fuseaction>
+	<fuseaction name="productForm">
+		<include template="dsp_productForm" />
+	</fuseaction>
+</circuit>

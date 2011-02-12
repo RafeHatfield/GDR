@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuit access="internal">	
+	<fuseaction name="home">
+		<include template="dsp_home" />
+	</fuseaction>
+	<fuseaction name="villaDetailsForm">
+		<include template="dsp_villaDetailsForm" />
+	</fuseaction>
+</circuit>

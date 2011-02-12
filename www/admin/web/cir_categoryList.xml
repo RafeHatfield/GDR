@@ -1,0 +1,20 @@
+<set name="attributes.cat_level" value="0" overwrite="no" />
+
+<set name="categorySearchForm" value="" overwrite="yes" />
+<set name="categoryOrderForm" value="" overwrite="yes" />
+
+<invoke object="application.contentObj" methodcall="categorySearchForm(attributes.cat_level)" returnVariable="categorySearchForm" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodCall="categoryOrderSave(argumentCollection=attributes)" />
+	</true>
+</if>
+
+<if condition="isDefined('attributes.search')">
+	<true>
+		<invoke object="application.contentObj" methodcall="categoryOrderListForm(attributes.cat_level)" returnVariable="categoryOrderForm" />
+	</true>
+</if>
+ 
+<set name="content.mainContent" value="#categorySearchForm##categoryOrderForm#" overwrite="yes" />

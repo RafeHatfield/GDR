@@ -1,0 +1,5 @@
+<set name="attributes.mem_id" value="0" overwrite="no" />
+
+<invoke object="application.memberObj" methodcall="getMemberMessages(mem_id=attributes.mem_id)" returnVariable="qMemberMessages" />
+ 
+<do action='v_member.memberMessages' contentVariable="content.mainContent" append="yes" />

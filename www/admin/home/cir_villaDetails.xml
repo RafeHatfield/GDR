@@ -1,0 +1,35 @@
+<xfa name="saveVillaDetails" value="home.villaDetails" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.villaObj" methodcall="villaDetailsSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.villaObj" methodcall="getVillaDetails()" returnVariable="qVillaDetails" />
+
+<if condition="qVillaDetails.recordCount gte 1">
+
+	<true>
+		<set name="attributes.vil_title" value="#qVillaDetails.vil_title#" />
+		<set name="attributes.vil_description" value="#qVillaDetails.vil_description#" />
+		<set name="attributes.vil_address" value="#qVillaDetails.vil_address#" />
+		<set name="attributes.vil_phone" value="#qVillaDetails.vil_phone#" />
+		<set name="attributes.vil_email" value="#qVillaDetails.vil_email#" />
+		<set name="attributes.vil_otherContact" value="#qVillaDetails.vil_otherContact#" />
+		<set name="attributes.vil_fax" value="#qVillaDetails.vil_fax#" />
+	</true>
+	
+	<false>
+		<set name="attributes.vil_title" value="" />
+		<set name="attributes.vil_description" value="" />
+		<set name="attributes.vil_address" value="" />
+		<set name="attributes.vil_phone" value="" />
+		<set name="attributes.vil_email" value="" />
+		<set name="attributes.vil_otherContact" value="" />
+		<set name="attributes.vil_fax" value="" />
+	</false>
+	
+</if>
+
+<do action='v_home.villaDetailsForm' contentVariable="content.mainContent" append="yes" />

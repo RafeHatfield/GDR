@@ -1,0 +1,3 @@
+<cfoutput>
+#content.mainContent#
+</cfoutput>

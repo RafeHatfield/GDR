@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<circuit access="internal">	
+
+	<fuseaction name="promotionForm">
+		<include template="dsp_promotionForm" />
+	</fuseaction>
+	
+	<fuseaction name="promotionsList">
+		<include template="dsp_promotionsList" />
+	</fuseaction>
+	
+</circuit>

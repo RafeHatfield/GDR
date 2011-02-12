@@ -1,0 +1,30 @@
+<xfa name="saveProfile" value="system.profileList" />
+<xfa name="editProfile" value="system.profileList" />
+<xfa name="permissionsList" value="system.profilePermissions" />
+
+<set name="attributes.prf_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<do action="m_system.profileAction" />
+	</true>
+</if>
+
+<do action="m_system.getProfile" />
+
+<if condition="getProfile.recordCount gte 1">
+	<true>
+		<set name="attributes.prf_name" value="#getProfile.prf_name#" />
+		<set name="attributes.prf_description" value="#getProfile.prf_description#" />
+	</true>
+	<false>
+		<set name="attributes.prf_name" value="" />
+		<set name="attributes.prf_description" value="" />
+	</false>
+</if>
+
+<do action='v_system.profileForm' contentVariable="content.mainContent" append="yes" />
+
+<do action="m_system.getProfiles" />
+
+<do action='v_system.profileList' contentVariable="content.mainContent" append="yes" />

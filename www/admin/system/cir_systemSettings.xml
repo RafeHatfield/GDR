@@ -1,0 +1,31 @@
+<xfa name="saveSystemSettings" value="system.systemSettings" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.systemObj" methodcall="systemSettingsSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.systemObj" methodcall="getSystemSettings()" returnVariable="qSystemSettings" />
+
+<if condition="qSystemSettings.recordCount gte 1">
+
+	<true>
+		<set name="attributes.sys_approval" value="#qSystemSettings.sys_approval#" />
+		<set name="attributes.sys_buildNumber" value="#qSystemSettings.sys_buildNumber#" />
+		<set name="attributes.sys_metaDescription" value="#qSystemSettings.sys_metaDescription#" />
+		<set name="attributes.sys_metaKeywords" value="#qSystemSettings.sys_metaKeywords#" />
+		<set name="attributes.sys_pageTitle" value="#qSystemSettings.sys_pageTitle#" />
+	</true>
+	
+	<false>
+		<set name="attributes.sys_approval" value="0" />
+		<set name="attributes.sys_buildNumber" value="0" />
+		<set name="attributes.sys_metaDescription" value="" />
+		<set name="attributes.sys_metaKeywords" value="" />
+		<set name="attributes.sys_pageTitle" value="" />
+	</false>
+	
+</if>
+
+<do action='v_system.systemSettingsForm' contentVariable="content.mainContent" append="yes" />

@@ -1,0 +1,276 @@
+* {
+	font-family: Verdana;
+	color: #333333;
+	font-size: 11px; 
+	vertical-align: baseline;
+	white-space: normal;
+}
+
+body {
+	background: #999999 url('../../assets/images/bg_body.gif') repeat-x;
+	/*text-align: center;*/
+}
+
+#header  {
+	margin-bottom: 15px;
+	height: 100px;
+	margin-top: 10px;
+	text-align:center;
+}
+
+/**************************/
+/*   common data table    */
+/**************************/
+table#dataTable tr.tableHeader {
+	height:27px; 
+	vertical-align:middle;
+	background-color:#E1F5AB;
+	width:100%; 
+	border:1px solid #d1d3d4; 
+	background-color:#ffffff; 
+	border-collapse:collapse;
+	margin-top:0px;
+	margin-bottom:5px;
+}
+
+table#dataTable th a {
+	font-weight: bold;
+	background-color:#dfe9d8;
+	text-align:left; 
+}
+
+table#dataTable th a.normal{
+	font-weight: normal;
+	text-align:left; 
+}
+
+table#dataTable tr {
+	height:18px !important; 
+}
+
+table#dataTable div.tableTitle {
+	float:left; 
+	font-weight:bold; 
+	color:#000;
+	padding:5px 5px 5px 5px;
+	font-size:13px;
+}
+
+table#dataTable div.tableTitle a{
+	font-weight:bold; 
+	color:#000;
+	font-size:12px;
+}
+
+table#dataTable div.showAll, table#formTable div.showAll, table#pisHeader div.showAll, table#dataTable span.showAll, table#formTable span.showAll, table#pisHeader span.showAll{
+	float:right; 
+	color:#000; 
+	padding:5px 5px 0px 0px;
+	text-transform:lowercase;
+}
+
+/**************************/
+/*   data table    		  */
+/**************************/
+table#dataTable{
+	width:100%; 
+	border:1px solid #d1d3d4; 
+	background-color:#ffffff; 
+	border-collapse:collapse;
+	margin-top:0px;
+	margin-bottom:5px;
+}
+table#dataTable tr th{
+	color:#000;
+	text-align:left;  
+	background-color:#eee;
+	height:25px;
+	text-transform: lowercase;
+	padding: 2px 5px 2px 5px;
+	font-weight: bold;
+}
+
+table#dataTable tr th.center{
+	color:#000;
+	text-align:center;  
+	height:25px;
+	text-transform: lowercase;
+	font-weight: bold;
+}
+
+
+table#dataTable tr th.right{
+	color:#000;
+	font-weight: bold;
+	text-align:right;
+	height:25px;
+	text-transform: lowercase;
+	padding: 2px 5px 2px 5px;
+}
+
+table#dataTable span.floatleft {
+	float: left;
+	vertical-align:middle;
+}
+
+table#dataTable span.floatleftblack {
+	color: #000000;
+	float: left;
+}
+
+
+table#formTable td, table#formTablePrint td{
+	border-bottom: 2px solid #fff;
+}
+
+tr.darkData{
+	background-color:#eee;
+	height:20px;
+}
+tr.lightData{
+	background-color:#fff;
+	height:20px;
+}
+tr.highlightData{
+	background-color:#33ffff;
+	height:20px;
+}
+tr.importantData{
+	background-color:#e4eaf1 !important;
+}
+
+tr.importantData td{
+	color:#EE5019 !important;
+}
+
+
+/**************************/
+/*        FORM table      */
+/**************************/
+table#formTable{
+	background-color:#fff;
+	border-bottom:10px solid #fff; 
+	border-collapse:collapse;
+	width:100%;
+}
+table#formTable tr.tableHeader {
+	height:27px !important; 
+	vertical-align:top;
+	background-color:#d1d3d4;
+	font-size:12px;
+}
+table#formTable div.tableTitle{
+	float:left; 
+	font-weight:bold; 
+	color:#000000;
+	padding:5px 0px 0px 2px;
+}
+table#formTable tr th{
+	height:24px !important; 
+	text-align:left; 
+	background-color:#ccc;
+	border-bottom: 2px solid #fff;
+}
+
+table#formTablePrint{
+	background-color:#fff;
+	border-bottom:10px solid #fff; 
+	border-collapse:collapse;
+	width:100%;
+}
+table#formTablePrint tr.tableHeader {
+	height:27px !important; 
+	vertical-align:top;
+	background-color:#d1d3d4;
+}
+table#formTablePrint div.tableTitle{
+	float:left; 
+	font-weight:bold; 
+	color:#000000;
+	padding:5px 0px 0px 2px;
+	
+}
+table#formTablePrint tr th{
+	height:24px !important; 
+	text-align:left; 
+	background-color:#ccc;
+	border-bottom: 2px solid #fff;
+}
+
+td.leftForm{
+	width:20%;
+	height:25px;
+	text-align:right;
+	font-weight:normal;
+	background-color:#d1d3d4;
+	padding-right: 10px;
+	padding-left: 20px;
+	background-image:url('/admin/images/formTableSpacer.gif');
+	background-position:right;
+	background-repeat:repeat-y;
+}
+td.rightForm{
+	text-align:right;
+	font-weight:bold;
+	background-color:#d1d3d4;
+	width:20px;
+	background-image:url('/admin/images/formTableSpacer.gif');
+	background-position:left;
+	background-repeat:repeat-y;
+}
+td.formFooter{
+	background-color:#d1d3d4;
+	text-align:right;
+	padding-right: 20px;
+}
+td.formFooterLeft{
+	background-color:#d1d3d4;
+	text-align:left;
+	padding-right: 5px;
+}
+td.formFooterNoAlign{
+	background-color:#d1d3d4;
+}
+td.formFooterCenter{
+	background-color:#d1d3d4;
+	text-align:center;
+}
+td.whiteGutter{
+	width:20px;
+}
+
+/**************************/
+/*        FORM buttons    */
+/**************************/
+input.button{	/* Input Button */	
+	font-size: 9.5px;	
+	color: #777;	
+	background: #fff;
+	cursor: hand;
+	text-transform: lowercase;
+	width: 200;
+}
+input.buttonOver{	/* Input Button MouseOver */	
+	font-size: 9.5px;	
+	color: #000;	
+	background: #efefef;	
+	cursor: hand;
+	text-transform: lowercase;
+	width: 200;
+}
+
+img.help			{cursor:pointer; float:right;}
+
+
+.filter {
+	border: solid 1px #ADDE26;
+}
+
+.filter TD {
+	padding: 4px;
+}
+
+.hidden {
+	visibility:hidden;
+	display:none
+}

@@ -1,0 +1,5 @@
+<set name="attributes.displayMode" value="Nav" overWrite="yes" />
+
+<set name="request.pageTitle" value="Home" />
+
+<do action="v_home.home" append="yes" contentVariable="content.mainContent" />

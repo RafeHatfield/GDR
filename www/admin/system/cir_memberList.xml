@@ -1,0 +1,18 @@
+<xfa name="searchMember" value="system.memberList" />
+<xfa name="editMember" value="system.memberForm" />
+<xfa name="memberPermissions" value="system.memberPermissions" />
+<xfa name="memberProfile" value="system.memberProfile" />
+
+<set name="attributes.prf_id" value="0" overwrite="false" />
+<set name="attributes.fastFind" value="" overwrite="false" />
+<set name="attributes.city" value="" overwrite="false" />
+<set name="attributes.state" value="" overwrite="false" />
+<set name="attributes.country" value="" overwrite="false" />
+
+<do action="m_system.getProfiles" />
+
+<do action="v_system.memberSearch" contentVariable="content.mainContent" append="yes" />
+
+<do action="m_system.getMembers" />
+
+<do action='v_system.memberList' contentVariable="content.mainContent" append="yes" />

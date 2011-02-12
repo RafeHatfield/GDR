@@ -1,0 +1,32 @@
+<xfa name="saveProducts" value="web.productList" />
+<xfa name="searchProducts" value="web.productList" />
+<xfa name="editProduct" value="web.productForm" />
+
+<set name="attributes.cat_id" value="0" overwrite="no" />
+<set name="attributes.subcat_id" value="0" overwrite="no" />
+<set name="attributes.cat3_id" value="0" overwrite="no" />
+<set name="attributes.keyword" value="" overwrite="no" />
+
+<set name="productOrderForm" value="" overwrite="yes" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodcall="productsOrderSave(argumentCollection=attributes)" />
+	</true>
+</if>
+
+<invoke object="application.menuObj" methodcall="getCategories()" returnVariable="qCategories" />
+<invoke object="application.menuObj" methodcall="getAllSubCategories()" returnVariable="qSubCategories" />
+<invoke object="application.menuObj" methodcall="getAllCategories3()" returnVariable="qCategories3" />
+
+<do action="v_web.productSearchForm" contentVariable="content.mainContent" append="yes" />
+
+<if condition="attributes.cat_id gt 0 OR attributes.subcat_id gt 0 or attributes.cat3_id gt 0 OR len(attributes.keyword) gt 0">
+
+	<true>
+		<invoke object="application.contentObj" methodcall="productOrderListForm(cat_id=attributes.cat_id,subcat_id=attributes.subcat_id,cat3_id=attributes.cat3_id,keyword=attributes.keyword)" returnVariable="productOrderForm" />
+	</true>
+
+</if>
+ 
+<set name="content.mainContent" value="#content.mainContent##productOrderForm#" overwrite="yes" />

@@ -1,0 +1,6 @@
+<set name="attributes.nsl_id" value="0" overwrite="no" />
+
+<invoke object="application.contentObj" methodcall="getNewsletter(nsl_id=attributes.nsl_id)" returnVariable="qNewsletter" />
+<invoke object="application.contentObj" methodcall="getNewsletterContent(nsl_id=attributes.nsl_id)" returnVariable="qNewsletterContent" />
+
+<do action='v_member.newsletterView' contentVariable="content.mainContent" append="yes" />

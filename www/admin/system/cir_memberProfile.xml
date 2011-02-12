@@ -1,0 +1,35 @@
+<xfa name="saveMemberProfile" value="system.memberProfile" />
+<xfa name="changePassword" value="system.passwordForm" />
+
+<set name="attributes.member_id" value="0" overwrite="false" />
+<set name="attributes.text" value="0" overwrite="false" />
+
+<do action="m_system.memberProfileAction" />
+
+<do action="m_system.getMember" />
+
+<!-- this section will be expanded to include all the details about a member - limiting to name and profile for now -->
+<if condition="getMember.recordCount gte 1">
+	<true>
+		<set name="attributes.full_name" value="#getMember.full_name#" />
+		<set name="attributes.name" value="#getMember.name#" />
+		<set name="attributes.url" value="#getMember.url#" />
+		<set name="attributes.profile" value="#getMember.profile#" />
+		<set name="attributes.show_full_name" value="#getMember.show_full_name#" />
+		<set name="attributes.is_contactable" value="#getMember.is_contactable#" />
+		<set name="attributes.caption" value="#getImage.caption#" />
+		<set name="attributes.credit" value="#getImage.credit#" />
+	</true>
+	<false>
+		<set name="attributes.full_name" value="" overwrite="false" />
+		<set name="attributes.name" value="" overwrite="false" />
+		<set name="attributes.url" value="" overwrite="false" />
+		<set name="attributes.profile" value="" overwrite="false" />
+		<set name="attributes.show_full_name" value="0" overwrite="false" />
+		<set name="attributes.is_contactable" value="0" overwrite="false" />
+		<set name="attributes.caption" value="" overwrite="false" />
+		<set name="attributes.credit" value="" overwrite="false" />
+	</false>
+</if>
+
+<do action='v_system.memberProfile' contentVariable="content.mainContent" append="yes" />

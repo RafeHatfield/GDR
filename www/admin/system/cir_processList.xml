@@ -1,0 +1,29 @@
+<xfa name="saveProcess" value="system.processList" />
+<xfa name="fuseList" value="system.fuseList" />
+
+<set name="attributes.pro_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<do action="m_system.processAction" />
+	</true>
+</if>
+
+<do action="m_system.getProcess" />
+
+<if condition="getProcess.recordCount gte 1">
+	<true>
+		<set name="attributes.pro_name" value="#getProcess.pro_name#" />
+		<set name="attributes.pro_path" value="#getProcess.pro_path#" />
+	</true>
+	<false>
+		<set name="attributes.pro_name" value="" />
+		<set name="attributes.pro_path" value="" />
+	</false>
+</if>
+
+<do action='v_system.processForm' contentVariable="content.mainContent" append="yes" />
+
+<do action="m_system.getProcesses" />
+
+<do action='v_system.processList' contentVariable="content.mainContent" append="yes" />

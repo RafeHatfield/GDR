@@ -1,0 +1,74 @@
+<xfa name="saveContent" value="web.contentForm" />
+
+<set name="attributes.con_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodcall="contentSave(argumentCollection=attributes)" />
+		<relocate url="#myself#web.contentList" addtoken="false" type="client" />
+	</true>
+</if>
+ 
+<invoke object="application.contentObj" methodcall="getContent(con_id=attributes.con_id)" returnVariable="qContent" />
+<invoke object="application.contentObj" methodcall="getContentParents()" returnVariable="qContentParents" />
+<invoke object="application.imageObj" methodcall="getContentImages(con_id=attributes.con_id)" returnVariable="qOtherContentImages" />
+
+<if condition="(#application.systemSettings.sys_approval# is 1 AND #listFind('1,2',cookie.prf_id)#) OR #application.systemSettings.sys_approval# is 0">
+	<true>
+		<set name="NewContentApproveState" value="1" />
+	</true>
+	<false>
+		<set name="NewContentApproveState" value="0" />
+	</false>
+</if>
+
+<if condition="qContent.recordCount gte 1">
+
+	<true>
+		<set name="attributes.con_menuTitle" value="#qContent.con_menuTitle#" />
+		<set name="attributes.con_title" value="#qContent.con_title#" />
+		<set name="attributes.con_intro" value="#qContent.con_intro#" />
+		<set name="attributes.con_body" value="#qContent.con_body#" />
+		<set name="attributes.con_isMenu" value="#qContent.con_isMenu#" />
+		<set name="attributes.con_menuArea" value="#qContent.con_menuArea#" />
+		<set name="attributes.con_menuOrder" value="#qContent.con_menuOrder#" />
+		<set name="attributes.con_parentID" value="#qContent.con_parentID#" />
+		<set name="attributes.con_active" value="#qContent.con_active#" />
+		<set name="attributes.con_type" value="#qContent.con_type#" />
+		<set name="attributes.con_approved" value="#qContent.con_approved#" />
+		<set name="attributes.con_link" value="#qContent.con_link#" />
+		<set name="attributes.con_metaDescription" value="#qContent.con_metaDescription#" />
+		<set name="attributes.con_metaKeywords" value="#qContent.con_metaKeywords#" />
+		<set name="attributes.img_id" value="#qContent.img_id#" />
+		<set name="attributes.img_name" value="#qContent.img_name#" />
+		<set name="attributes.img_title" value="#qContent.img_title#" />
+		<set name="attributes.img_altText" value="#qContent.img_altText#" />
+	</true>
+	
+	<false>
+		<set name="attributes.con_menuTitle" value="" />
+		<set name="attributes.con_title" value="" />
+		<set name="attributes.con_intro" value="" />
+		<set name="attributes.con_body" value="" />
+		<set name="attributes.con_isMenu" value="0" />
+		<set name="attributes.con_menuArea" value="0" />
+		<set name="attributes.con_menuOrder" value="1" />
+		<set name="attributes.con_parentID" value="0" />
+		<set name="attributes.con_active" value="1" />
+		<set name="attributes.con_type" value="Content" />
+		<set name="attributes.con_approved" value="#NewContentApproveState#" />
+		<set name="attributes.con_link" value="" />
+		<set name="attributes.con_metaDescription" value="" />
+		<set name="attributes.con_metaKeywords" value="" />
+		<set name="attributes.img_id" value="" />
+		<set name="attributes.img_name" value="" />
+		<set name="attributes.img_title" value="" />
+		<set name="attributes.img_altText" value="" />
+	</false>
+	
+</if>
+
+<invoke object="application.menuObj" methodcall="getMenuAreas()" returnVariable="qMenuAreas" />
+<invoke object="application.contentObj" methodcall="getGloryBoxes()" returnVariable="qGloryBoxes" />
+
+<do action='v_web.contentForm' contentVariable="content.mainContent" append="yes" />

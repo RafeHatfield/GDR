@@ -1,0 +1,18 @@
+<xfa name="saveProfilePermissions" value="system.profilePermissions" />
+
+<set name="attributes.prf_id" value="0" overwrite="false" />
+<set name="attributes.profilePermissionsList" value="" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<do action="m_system.profilePermissionsUpdate" />
+	</true>
+</if>
+
+<do action="m_system.getProfile" />
+<do action="m_system.getFuses" />
+<do action="m_system.getProfilePermissions" />
+
+<set name="attributes.thisProfilePermissionsList" value="#valueList(getProfilePermissions.pff_processFuse)#" />
+
+<do action='v_system.profilePermissionsList' contentVariable="content.mainContent" append="yes" />

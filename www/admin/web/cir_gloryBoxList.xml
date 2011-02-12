@@ -1,0 +1,33 @@
+<xfa name="saveGloryBox" value="web.gloryBoxList" />
+<xfa name="editGloryBox" value="web.gloryBoxList" />
+
+<set name="attributes.gbx_id" value="0" overwrite="false" />
+
+<if condition="isDefined('attributes.save')">
+	<true>
+		<invoke object="application.contentObj" methodcall="gloryBoxSave(argumentCollection=attributes)" />
+	</true>
+</if>
+ 
+<invoke object="application.contentObj" methodcall="getGloryBox(attributes.gbx_id)" returnVariable="qGloryBox" />
+
+<if condition="qGloryBox.recordCount gte 1">
+	<true>
+		<set name="attributes.gbx_title" value="#qGloryBox.gbx_title#" />
+		<set name="attributes.gbx_name" value="#qGloryBox.gbx_name#" />
+		<set name="attributes.gbx_type" value="#qGloryBox.gbx_type#" />
+		<set name="attributes.gbx_active" value="#qGloryBox.gbx_active#" />
+	</true>
+	<false>
+		<set name="attributes.gbx_title" value="" />
+		<set name="attributes.gbx_name" value="" />
+		<set name="attributes.gbx_type" value="" />
+		<set name="attributes.gbx_active" value="1" />
+	</false>
+</if>
+
+<do action='v_web.gloryBoxForm' contentVariable="content.mainContent" append="yes" />
+
+<invoke object="application.contentObj" methodcall="getGloryBoxes(gbx_active=0)" returnVariable="qGloryBoxes" />
+
+<do action='v_web.gloryBoxList' contentVariable="content.mainContent" append="yes" />
