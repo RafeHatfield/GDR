@@ -36,7 +36,6 @@
 								SELECT *
 								FROM qMenu
 								WHERE con_parentID = <cfqueryparam cfsqltype="cf_sql_integer" value="#mainMenu.con_id#" list="false" />
-									AND con_active = 1
 							</cfquery>
 							
 							<cfif subMenu.recordCount>
