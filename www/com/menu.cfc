@@ -388,6 +388,7 @@
 				<cfif listLen(request.memberCategoryList) gte 1>
 					AND cat_id IN (<cfqueryparam cfsqltype="cf_sql_integer" value="#request.memberSubCategoryList#" list="true" />)
 				</cfif>
+				AND cat_active = 1
 			ORDER BY cat_order, cat_title
 		</cfquery>
 		
