@@ -81,7 +81,7 @@
 				<td class="rightForm">&nbsp;</td>
 			</tr>
 
-			<tr>
+			<tr style="display:none;">
 				<td class="leftForm">Colour</td>
 				<td class="whiteGutter">&nbsp;</td>
 				<td>
@@ -91,7 +91,7 @@
 				<td class="rightForm">&nbsp;</td>
 			</tr>
 
-			<tr>
+			<tr style="display:none;">
 				<td class="leftForm">Dimensions</td>
 				<td class="whiteGutter">&nbsp;</td>
 				<td>
@@ -101,7 +101,7 @@
 				<td class="rightForm">&nbsp;</td>
 			</tr>
 
-			<tr>
+			<tr style="display:none;">
 				<td class="leftForm">Description</td>
 				<td class="whiteGutter">&nbsp;</td>
 				<td>
@@ -131,7 +131,7 @@
 				<td class="rightForm">&nbsp;</td>
 			</tr>
 
-			<tr>
+			<tr style="display:none;">
 				<td class="leftForm">Image</td>
 				<td class="whiteGutter">&nbsp;</td>
 				<td>
@@ -143,6 +143,24 @@
 					<br />
 					Note: Image will be resized to max dim 120px for a thumbnail, and 350px for the main view.  <br />
 					For best performance, don't upload images larger than 800px.
+				</td>
+				<td class="whiteGutter">&nbsp;</td>
+				<td class="rightForm">&nbsp;</td>
+			</tr>
+
+
+			<tr>
+				<td class="leftForm">Viewing Image</td>
+				<td class="whiteGutter">&nbsp;</td>
+				<td>
+					<cfif len(qProduct.prd_code) AND fileExists("#application.imageUploadPath#products/#replaceNoCase(qProduct.prd_code," ","","all")#_view.jpg")>
+						<img src="#application.imagePath#products/#replaceNoCase(qProduct.prd_code," ","","all")#_view.jpg" width="200" />
+					</cfif>
+					
+					<br />
+					<input type="file" name="prdImageView" value="" style='width:250px'>
+					<br />
+					Note: This image will not be resized, so make sure it is uploaded exactly as you wish it to appear
 				</td>
 				<td class="whiteGutter">&nbsp;</td>
 				<td class="rightForm">&nbsp;</td>

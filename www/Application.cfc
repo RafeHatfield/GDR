@@ -135,6 +135,13 @@
 		<cfargument name="targetPage" />
 		
 		<cfset super.onRequestStart(argumentCollection=arguments) />
+
+		<cfparam name="application.readonlymode" default="0">
+
+		<cfif application.readonlymode and len(cgi.query_string) and not isDefined("url.maintenance")>
+			<cflocation url="http://www.gdrasia.com" addtoken="false">
+		</cfif>
+
 		
 		<!--- if we are not on a development server and a www. is not prefixed into the url --->
 		<cfif not ReFind("(\.local)$", cgi.http_host) and not ReFind("^www\.", cgi.http_host)>

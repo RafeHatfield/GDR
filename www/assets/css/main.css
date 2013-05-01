@@ -254,6 +254,10 @@ a.np {
 }
 
 .product_box_left{
+	filter: alpha(opacity=60);
+	z-index: 999999;
+	position: relative;
+	opacity: 0.6;
 	float:left;
 	width:370px;
 	font-size:16px;
@@ -290,6 +294,7 @@ a.np {
 .submenu{
 	float:left;
 	margin-left:11px;
+	margin-top:45px;
 	width:165px;
 	display:inline;
 	padding:28px 0 0 0;
@@ -317,15 +322,15 @@ a.np {
 .product_box_right{
 	float:left;
 	margin-top:28px;
-	margin-left:10px;
+	margin-left: -175px;
 	display:inline;
-	width:530px;
+	width:715px;
 	height:534px;
 	}
 .flexcroll_wrapper{
 	background:#fff;
 	padding-left:9px;
-	padding-bottom:18px;
+	padding-bottom:10px;
 	}
 .product_box_right h3{
 	text-align:right;
@@ -345,7 +350,7 @@ a.np {
 	padding-top:18px;
 	}
 .flexcroll{
-	width:510px;
+	width:705px;
 	height:449px;
 	overflow:auto;
 	}
@@ -359,7 +364,7 @@ a.np {
 	padding:25px 0 10px 0;
 	}
 .pages{
-	width:510px;
+	width:710px;
 	padding:0 0 0 16px;
 	overflow:hidden;
 	text-align:right;

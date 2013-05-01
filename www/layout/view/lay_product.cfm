@@ -15,6 +15,20 @@
 		<script type="text/javascript" src="assets/js/fsmenu.js"></script>
 		 <script type="text/javascript" src="assets/js/scripts.js"></script>
 		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="assets/js/jquery-ui-1.10.1.custom.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui-1.10.1.custom.css">
+
+		<script>
+		  $(function() {
+		    $( "##menu" ).menu();
+		  });
+		</script>
+
+  <style>
+  .ui-menu { width: 195px; }
+  </style>
+		
 	</head>
 	<cfparam name="request.googleMap" default="0" />
 	<body<cfif request.googleMap> onload="load()" onunload="GUnload()"</cfif>>
@@ -39,11 +53,11 @@
 		                     <h2>product</h2>
 		                     #content.categoryMenu#
 		                 </div>
-		                 
+		                 <!--- 
 		                 <div class="submenu">
 			                 #content.subCategoryMenu#        
 		                 </div>
-		                 
+		                  --->
 		             </div>
 		             
 		             <div class="product_box_right">

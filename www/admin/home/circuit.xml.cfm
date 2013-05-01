@@ -4,10 +4,10 @@
 		
 		<fuseaction name="home" permissions="1,2,3,4,5|">
 			<set name="attributes.displayMode" overWrite="yes" value="Nav"/>
-
-<set name="request.pageTitle" value="Home"/>
-
-<do action="v_home.home" append="yes" contentVariable="content.mainContent"/>
+			
+			<set name="request.pageTitle" value="Home"/>
+			
+			<do action="v_home.home" append="yes" contentVariable="content.mainContent"/>
 		</fuseaction>
 	
 		

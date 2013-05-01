@@ -292,9 +292,12 @@
 		
 		<cfsaveContent variable="categoryMenu">
 			<cfoutput>
-				<ul>
+				<ul id="menu">
 					<cfloop query="qCategories">
-						<li><a href="#request.myself#products.list&cat_id=#qCategories.cat_id#"<cfif arguments.cat_id is qCategories.cat_id> class="selected"</cfif>>#lcase(qCategories.cat_title)#</a></li>
+						<li>
+							<a href="#request.myself#products.list&cat_id=#qCategories.cat_id#"<cfif arguments.cat_id is qCategories.cat_id> class="selected"</cfif>>#lcase(qCategories.cat_title)#</a>
+							#displaySubCategoryMenu(cat_id=qCategories.cat_id)#
+						</li>
 					</cfloop>
 				</ul>
 			</cfoutput>

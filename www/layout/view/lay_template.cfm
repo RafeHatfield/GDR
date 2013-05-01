@@ -82,6 +82,30 @@ pageTracker._trackPageview();
 <!-- #cookie.gdrProductList#<br />#cookie.gdrUserID# -->
 </cfoutput>
 
+<cfparam name="application.readonlymode" default="0" />
+
+<cfif isDefined("url.maintenance")>
+
+	<cfif url.maintenance is 1>
+		<cfset application.readonlymode = 1 />
+		<script>
+			alert('Site is now in maintenance mode.');
+		</script>
+	<cfelse>
+		<cfset application.readonlymode = 0 />
+		<script>
+			alert('Site is no longer in maintenance mode.');
+		</script>
+	</cfif>
+
+</cfif>
+
+<cfif application.readonlymode>
+	<script>
+		alert('This site is currently undergoing maintenance.  Please check back soon!');
+	</script>
+</cfif>
+
 <cfif isDefined("url.imageResize")>
 
 	<cfdirectory action="list" name="imageSet" directory="#application.imageUploadPath#products/original/" />

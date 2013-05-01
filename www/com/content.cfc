@@ -525,149 +525,6 @@
 
 	</cffunction>
 
-	<!--- Author: Rafe - Date: 10/8/2009 --->
-	<cffunction name="getNewsletters" output="false" access="public" returntype="query" hint="i return all of the newsletters in the system">
-
-		<cfset var getNewsletters = "" />
-
-		<cfquery name="getNewsletters" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-			SELECT nsl_id, nsl_title, nsl_dateEntered
-			FROM wwwNewsletter
-			ORDER BY nsl_dateEntered DESC
-		</cfquery>
-
-		<cfreturn getNewsletters />
-
-	</cffunction>
-
-	<!--- Author: Rafe - Date: 10/8/2009 --->
-	<cffunction name="getNewsletter" output="false" access="public" returntype="query" hint="i return all of the newsletters in the system">
-
-		<cfargument name="nsl_id" type="numeric" default="0" required="true" />
-
-		<cfset var getNewsletter = "" />
-
-		<cfquery name="getNewsletter" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-			SELECT nsl_id, nsl_title, nsl_body, nsl_dateEntered
-			FROM wwwNewsletter
-			WHERE nsl_id = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.nsl_id#" list="false" />
-		</cfquery>
-
-		<cfreturn getNewsletter />
-
-	</cffunction>
-
-	<!--- Author: Rafe - Date: 10/8/2009 --->
-	<cffunction name="getNewsletterContent" output="false" access="public" returntype="query" hint="I return the content that is attached to a newsletter">
-
-		<cfargument name="nsl_id" type="numeric" default="0" required="true" />
-
-		<cfset var getNewsletterContent = "" />
-
-		<cfquery name="getNewsletterContent" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-			SELECT con_id, con_title, con_body, con_menuOrder, con_type, con_sanitise, con_fuseAction, con_link,
-				img_id, img_name, img_title, img_altText, img_height, img_width
-			FROM wwwContent
-				INNER JOIN wwwNewsletter_Content ON con_id = nlc_content
-				LEFT OUTER JOIN wwwContent_Image on con_id = coi_content
-				LEFT OUTER JOIN wwwImage on coi_image = img_id
-			WHERE nlc_newsletter = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.nsl_id#" list="false" />
-			ORDER BY nlc_order
-		</cfquery>
-
-		<cfreturn getNewsletterContent />
-
-	</cffunction>
-
-	<!--- Author: Rafe - Date: 10/8/2009 --->
-	<cffunction name="newsletterSave" output="false" access="public" returntype="numeric" hint="I save the newsletter and send back the ID">
-
-		<cfargument name="nsl_id" type="numeric" default="0" required="true" />
-
-		<cfset var addNewsletter = "" />
-		<cfset var updateNewsletter = "" />
-		<cfset var newsletterID = arguments.nsl_id />
-
-		<cfif arguments.nsl_id gt 0>
-
-			<cfquery name="updateNewsletter" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-				UPDATE wwwNewsletter SET
-					nsl_title = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.nsl_title#" list="false" />,
-					nsl_body = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.nsl_body#" list="false" />
-				WHERE nsl_id = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.nsl_id#" list="false" />
-			</cfquery>
-
-		<cfelse>
-
-			<cfquery name="addNewsletter" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-				INSERT INTO wwwNewsletter (
-					nsl_title,
-					nsl_body
-				) VALUES (
-					<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.nsl_title#" list="false" />,
-					<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.nsl_body#" list="false" />
-				)
-				SELECT SCOPE_IDENTITY() AS newsletterID
-			</cfquery>
-
-			<cfset newsletterID = addNewsletter.newsletterID />
-
-		</cfif>
-
-		<cfif arguments.con_id gt 0>
-
-			<cfquery name="addNewsletterContent" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-				INSERT INTO wwwNewsletter_Content (
-					nlc_newsletter,
-					nlc_content
-					<cfif isNumeric(nlc_order)>
-						, nlc_order
-					</cfif>
-				) VALUES (
-					<cfqueryparam cfsqltype="cf_sql_integer" value="#newsletterID#" list="false" />,
-					<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.con_id#" list="false" />
-					<cfif isNumeric(nlc_order)>
-						, <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.nlc_order#" list="false" />
-					</cfif>
-				)
-			</cfquery>
-
-		</cfif>
-
-		<cfreturn newsletterID />
-
-	</cffunction>
-
-	<!--- Author: Rafe - Date: 10/13/2009 --->
-	<cffunction name="newsletterSend" output="false" access="public" returntype="any" hint="I send a newsletter to the select group">
-
-		<cfargument name="nsl_id" type="numeric" default="" required="true" />
-		<cfargument name="grp_id" type="string" default="" required="true" />
-		<cfargument name="int_id" type="string" default="" required="false" />
-		<cfargument name="cou_id" type="string" default="" required="false" />
-
-		<cfset var addSentNewsletter = "" />
-		<cfset var getMembers = application.memberObj.getMembers(groupList=arguments.grp_id,validEmail=1,interestList=arguments.int_id,countryList=arguments.cou_id) />
-		<cfset var thisGroup = "" />
-
-		<cfloop query="getMembers">
-
-			<cfquery name="addSentNewsletter" datasource="#application.DBDSN#" username="#application.DBUserName#" password="#application.DBPassword#">
-				INSERT INTO member_newsletter (
-					mnl_member,
-					mnl_newsletter
-				) VALUES (
-					<cfqueryparam cfsqltype="cf_sql_integer" value="#mem_id#" list="false" />,
-					<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.nsl_id#" list="false" />
-				)
-			</cfquery>
-
-		</cfloop>
-
-		<cfreturn getMembers.recordCount />
-
-	</cffunction>
-
 	<!--- Author: rafe - Date: 12/7/2009 --->
 	<cffunction name="getContentParents" output="false" access="public" returntype="query" hint="I return a query with the content that can be parents">
 		
@@ -720,7 +577,7 @@
 						<cfoutput><h3>#qCategory.cat_title# <span>#qSubCategory.cat_title#<cfif qCategory3.recordCount> - #qCategory3.cat_title#</cfif></span></h3>
 						
 						<div id="crol1" class="flexcroll">
-
+							<div style="float:right">
 							<table width="485" border="0" cellspacing="0" cellpadding="2"></cfoutput>
 								
 								<cfoutput query="qProducts" group="subCatTitle">
@@ -763,7 +620,10 @@
 									
 								</cfoutput>
 								
-							<cfoutput></table>
+							<cfoutput>
+
+							</table>
+							</div>
 <!--- 							<table width="485" border="0" cellspacing="0" cellpadding="2">
 								
 								<cfloop query="qProducts">
@@ -1020,23 +880,31 @@
 				
 				<div class="flexcroll_wrapper">
 
-					<h3>#qCategory.cat_title# <span>#qSubCategory.cat_title#</span></h3>
-					
-					<div id="crol1" class="flexcroll">
+					<cfif not fileExists("#application.imageUploadPath#products/#replaceNoCase(qProduct.prd_code," ","","all")#_view.jpg")>
+							
+						<h3>#qCategory.cat_title# <span>#qSubCategory.cat_title#</span></h3>
 						
-						<img style="margin-top: 20px; margin-left: 15px" src="#application.imagePath#products/#replaceNoCase(qProduct.prd_code," ","","all")#_main.jpg" alt="#qProduct.prd_title# - #qProduct.prd_code#" />
-						
-						<h2 style="margin-top: 20px; margin-left: 15px">
-							#qProduct.prd_title#
-						</h2>
-						<br />
-						<p style="margin-left: 15px"><strong>Code:</strong> ###qProduct.prd_code# <strong>Colour:</strong> #qProduct.prd_colour#</p>
-						<p style="margin-left: 15px"><strong>Dimensions:</strong> #qProduct.prd_dimension#</p>
-						<cfif len(trim(qProduct.prd_desc))>
-							<p style="margin-left: 15px">#qProduct.prd_desc#</p>
-						</cfif>
-						
-					</div>
+						<div id="crol1" class="flexcroll">
+							
+							<div style="float:right">
+							<img style="margin-top: 20px; margin-right: 15px" src="#application.imagePath#products/#replaceNoCase(qProduct.prd_code," ","","all")#_main.jpg" alt="#qProduct.prd_title# - #qProduct.prd_code#" />
+							
+							<h2 style="margin-top: 20px; margin-left: 15px">
+								#qProduct.prd_title#
+							</h2>
+							<br />
+							<p style="margin-left: 15px"><strong>Code:</strong> ###qProduct.prd_code# <strong>Colour:</strong> #qProduct.prd_colour#</p>
+							<p style="margin-left: 15px"><strong>Dimensions:</strong> #qProduct.prd_dimension#</p>
+							<cfif len(trim(qProduct.prd_desc))>
+								<p style="margin-left: 15px">#qProduct.prd_desc#</p>
+							</cfif>
+							</div>
+						</div>
+					<cfelse>
+
+						<img src="#application.imagePath#products/#replaceNoCase(qProduct.prd_code," ","","all")#_view.jpg" />
+
+					</cfif>
 				
 				</div>
 					 
@@ -1289,6 +1157,7 @@
 		<cfset var fileNameSanitise = "" />
 		<cfset var newFileNameTN = "" />
 		<cfset var newFileNameMain = "" />
+		<cfset var newFileNameView = "" />
 		<cfset var origWidth = "" />
 		<cfset var origHeight = "" />
 				
@@ -1342,12 +1211,25 @@
 			</cfquery>
 		
 		</cfif>
-		
-		<cfif len(arguments.prdImage)>
-			
-			<cffile action="upload" filefield="prdImage" destination="#application.imageUploadPath#products/" nameconflict="overwrite" accept="image/jpeg, image/jpg, image/pjpeg">
 
+		<cfif len(arguments.prdImageView)>
+
+			<cfset newFileNameView = productCode & '_view.jpg' />
+
+			<cffile action="upload" filefield="prdImageView" destination="#application.imageUploadPath#products" nameconflict="overwrite" accept="image/jpeg, image/jpg, image/pjpeg">
+			
 			<cfset FileName = cffile.serverFileName & '.' & cffile.serverFileExt />
+			
+			<cffile action="copy" source="#application.imageUploadPath#products/#fileName#" destination="#application.imageUploadPath#products/#newFileNameView#">
+
+<!--- 		</cfif>
+		
+		<cfif len(arguments.prdImage)> --->
+
+			
+		<!--- 	<cffile action="upload" filefield="prdImage" destination="#application.imageUploadPath#products/" nameconflict="overwrite" accept="image/jpeg, image/jpg, image/pjpeg">
+
+			<cfset FileName = cffile.serverFileName & '.' & cffile.serverFileExt /> --->
 			<cfset fileNameSanitise = application.contentObj.sanitise(cffile.serverFileName) & '.' & cffile.serverFileExt />
 
 			<cffile action="rename" source="#application.imageUploadPath#products/#fileName#" destination="#application.imageUploadPath#products/#fileNameSanitise#">
